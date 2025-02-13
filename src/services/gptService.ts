@@ -232,7 +232,7 @@ export class GPTService {
 
   async exploreQuery(query: string): Promise<string> {
     try {
-      const response = await fetch("/api/explore", {
+      const response = await fetch("https://edu-backend.devs24.com/api/explore", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -269,7 +269,7 @@ export class GPTService {
 
     while (retryCount < maxRetries) {
       try {
-        const response = await fetch("/api/explore-content", {
+        const response = await fetch("https://edu-backend.devs24.com/api/explore-content", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
