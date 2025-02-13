@@ -10,7 +10,7 @@ export default defineConfig({
     open: true,
     proxy: {
       "/api": {
-        target: "http://localhost:5000",
+        target: "http://edu-backend.devs24.com",
         changeOrigin: true,
       },
     },
