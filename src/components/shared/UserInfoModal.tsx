@@ -1,4 +1,4 @@
-// src/components/shared/UserInfoModal.tsx
+// Unused component
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
 

@@ -1,6 +1,7 @@
-// src/components/shared/SearchBar.tsx
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, { useState, KeyboardEvent, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion"; // You'll need to install framer-motion
+import { motion, AnimatePresence } from "framer-motion";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -29,7 +30,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
-    // Load recent searches from localStorage
     const saved = localStorage.getItem("recentSearches");
     if (saved) {
       setRecentSearches(JSON.parse(saved));
@@ -42,7 +42,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   const handleSearch = (searchQuery: string) => {
     if (searchQuery.trim()) {
-      // Save to recent searches
       const updated = [
         searchQuery,
         ...recentSearches.filter((s) => s !== searchQuery),
@@ -56,6 +55,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
+      setQuery("");
       handleSearch(query);
     }
   };
@@ -64,19 +64,19 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     setQuery(suggestion);
     handleSearch(suggestion);
     setShowSuggestions(false);
+    setQuery("");
   };
 
-  // Add keyboard shortcut (Cmd/Ctrl + K)
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: any) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         document.querySelector<HTMLInputElement>('input[type="text"]')?.focus();
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown as any);
-    return () => window.removeEventListener("keydown", handleKeyDown as any);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
@@ -108,8 +108,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             }}
             onBlur={() => {
               setIsFocused(false);
-              // Delay hiding suggestions to allow clicking them
-              setTimeout(() => setShowSuggestions(false), 200);
             }}
             placeholder={placeholder}
             className={`w-full pl-4 pr-24 py-4 bg-gray-800/80 border border-gray-700/50 
@@ -177,7 +175,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="absolute w-full mt-2 py-2 bg-gray-800/95 rounded-xl shadow-xl border border-gray-700/50 z-50"
+              className="w-full mt-2 py-2 bg-gray-800/95 rounded-xl shadow-xl border border-gray-700/50 z-50 max-h-60 overflow-visible"
             >
               {recentSearches.length > 0 && (
                 <div className="px-4 py-2">
@@ -221,9 +219,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           transition={{ delay: 0.3 }}
           className="mt-6 space-y-2"
         >
-         <p className="text-gray-400 text-sm"></p>
+          <p className="text-gray-400 text-sm"></p>
           <div className="flex items-center justify-center space-x-4 text-sm text-gray-500">
-           <span></span>  
+            <span></span>
             {suggestions.map(({ text, icon }, idx) => (
               <motion.button
                 key={idx}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface UserContext {
   age: number;
 }
@@ -33,6 +34,11 @@ export interface ExploreResponse {
     type: string;
     context: string;
   }>;
+  queries?: Array<{
+    query: string;
+    type: string;
+    context: string;
+  }>;
 }
 
 export interface PreFillFormProps {
@@ -43,4 +49,4 @@ declare global {
   interface Window {
     dataLayer: any[];
   }
-} 
+}

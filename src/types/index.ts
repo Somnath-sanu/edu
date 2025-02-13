@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export interface UserContext {
   age: number;
@@ -20,7 +21,7 @@ export interface ExploreResponse {
 
 export interface RelatedTopic {
   query: string;
-  type: 'prerequisite' | 'extension' | 'application' | 'parallel' | 'deeper';
+  type: "prerequisite" | "extension" | "application" | "parallel" | "deeper";
   context: string;
 }
 
@@ -47,7 +48,7 @@ export interface SearchBarProps {
     text: string;
     icon: string;
   }>;
-  buttonText?: string; 
+  buttonText?: string;
   initialValue?: string;
   onSubmit?: (query: string) => void;
 }
@@ -69,5 +70,3 @@ export interface MarkdownComponentProps {
   children?: React.ReactNode;
   [key: string]: any;
 }
-
-// Add other shared types here 

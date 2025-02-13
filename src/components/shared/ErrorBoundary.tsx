@@ -1,4 +1,4 @@
-// src/components/shared/ErrorBoundary.tsx
+//Unused component
 import { Component, ErrorInfo, ReactNode } from "react";
 import { AlertTriangle, RefreshCw } from "lucide-react";
 

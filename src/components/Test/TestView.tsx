@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/components/Test/TestView.tsx
 import { useState, useEffect } from 'react';
 import { SearchBar } from '../shared/SearchBar';
