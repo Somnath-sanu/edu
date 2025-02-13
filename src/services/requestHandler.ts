@@ -4,7 +4,7 @@ export async function makeRequest(
   maxTokens: number = 2000
 ) {
   try {
-    const response = await fetch("/api/generate", {
+    const response = await fetch("http://edu-backend.devs24.com/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
