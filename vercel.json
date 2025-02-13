@@ -6,7 +6,7 @@
     },
     {
       "source": "/api/:path*",
-      "destination": "http://edu-backend.devs24.com/api/:path*"
+      "destination": "https://edu-backend.devs24.com/api/:path*"
     }
   ]
 } 
