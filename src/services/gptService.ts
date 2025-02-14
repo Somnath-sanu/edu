@@ -157,23 +157,26 @@ export class GPTService {
           ]
         }`;
 
-      const content = await makeRequest(
+      const aiResponse = await makeRequest(
         systemPrompt,
         `Create 15 ${examType} questions about ${topic} (5 easy, 5 medium, 5 hard)`,
         3000
       );
 
-      if (!content) {
+      if (!aiResponse) {
         console.error("Empty response from API");
         throw new Error("No content received from API");
       }
+
+      const responseText = aiResponse.candidates[0].content.parts[0].text;
+      const content = responseText.replace(/```json\n|```/g, "");
 
       let parsed;
       try {
         parsed = JSON.parse(content);
       } catch (error) {
         console.error("JSON parse error:", error);
-        console.log("Raw content:", content);
+
         throw new Error("Failed to parse API response");
       }
 
@@ -190,7 +193,10 @@ export class GPTService {
             options: Array.isArray(q.options) ? q.options : [],
             correctAnswer:
               typeof q.correctAnswer === "number" ? q.correctAnswer : 0,
-            explanation: q.explanation || "",
+            explanation: {
+              correct: q.explanation || "",
+              key_point: "Key point not provided",
+            },
             difficulty,
             topic,
             subtopic: q.subtopic || `${topic} Concept ${index + 1}`,
@@ -209,11 +215,9 @@ export class GPTService {
         return isValid;
       });
 
-      console.log(`Valid questions: ${validQuestions.length}`);
-
       if (validQuestions.length >= 5) {
-        const finalQuestions = validQuestions.slice(0, 15);
-        console.log(`Returning ${finalQuestions.length} questions`);
+        const finalQuestions = validQuestions.slice(0, 10); // 10 questions
+
         return finalQuestions;
       }
 
@@ -232,7 +236,7 @@ export class GPTService {
 
   async exploreQuery(query: string): Promise<string> {
     try {
-      const response = await fetch("https://edu-backend.devs24.com/api/explore", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/explore`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -269,7 +273,7 @@ export class GPTService {
 
     while (retryCount < maxRetries) {
       try {
-        const response = await fetch("https://edu-backend.devs24.com/api/explore-content", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/explore-content`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

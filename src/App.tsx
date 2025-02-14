@@ -9,6 +9,7 @@ import { PreFillForm } from './components/shared/PreFillForm';
 import { UserContext } from './types';
 import { Toaster, toast } from 'react-hot-toast';
 import { GoogleTagManager } from './components/shared/GoogleTagManager';
+import { TestView } from './components/Test/TestView';
 
 function App() {
   const [userContext, setUserContext] = useState<UserContext | null>(null);
@@ -55,7 +56,7 @@ function App() {
                 />
               } 
             />
-            {/* <Route 
+            <Route 
               path="/test" 
               element={
                 <TestView 
@@ -64,7 +65,7 @@ function App() {
                   userContext={userContext}
                 />
               } 
-            /> */}
+            />
           </Routes>
         </Layout>
       </div>

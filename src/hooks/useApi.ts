@@ -23,15 +23,14 @@ export const useApi = () => {
     }
   };
 
-  const generateTest = async (topic: string, examType: 'JEE' | 'NEET') => {
+  const generateTest = async (topic: string, examType: "JEE" | "NEET") => {
     setIsLoading(true);
     try {
-      console.log('Generating test for:', { topic, examType });
       const questions = await api.generateTest(topic, examType);
-      console.log('API response:', questions);
+
       return questions;
     } catch (err) {
-      console.error('Test Generation Error:', err);
+      console.error("Test Generation Error:", err);
       throw err;
     } finally {
       setIsLoading(false);

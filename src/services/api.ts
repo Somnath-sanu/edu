@@ -39,9 +39,8 @@ export const api = {
     examType: "JEE" | "NEET"
   ): Promise<Question[]> {
     try {
-      console.log("API generateTest called with:", { topic, examType });
       const questions = await gptService.getTestQuestions(topic, examType);
-      console.log("API received questions:", questions);
+
       return questions.map(transformQuestion);
     } catch (error) {
       console.error("Test generation error:", error);

@@ -10,7 +10,7 @@ export default defineConfig({
     open: true,
     proxy: {
       "/api": {
-        target: "https://edu-backend.devs24.com",
+        target: "https://edu-backend-1-m2ub.onrender.com",
         changeOrigin: true,
       },
     },
