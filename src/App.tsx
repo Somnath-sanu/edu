@@ -1,18 +1,28 @@
 // src/App.tsx
-import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Layout } from './components/Layout/Layout';
-import { ExploreView } from './components/Explore/ExploreView';
-import { PlaygroundView } from './components/Playground/PlaygroundView';
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Layout } from "./components/Layout/Layout";
+import { ExploreView } from "./components/Explore/ExploreView";
+import { PlaygroundView } from "./components/Playground/PlaygroundView";
 // import { TestView } from './components/Test/TestView';
-import { PreFillForm } from './components/shared/PreFillForm';
-import { UserContext } from './types';
-import { Toaster, toast } from 'react-hot-toast';
-import { GoogleTagManager } from './components/shared/GoogleTagManager';
-import { TestView } from './components/Test/TestView';
+import { PreFillForm } from "./components/shared/PreFillForm";
+import { UserContext } from "./types";
+import { Toaster, toast } from "react-hot-toast";
+import { GoogleTagManager } from "./components/shared/GoogleTagManager";
+import { TestView } from "./components/Test/TestView";
+
 
 function App() {
   const [userContext, setUserContext] = useState<UserContext | null>(null);
+
+  //Active the backend
+  setInterval(async () => {
+    const data = await fetch(`${import.meta.env.VITE_API_URL!}`);
+
+    console.log({
+      data: await data.text(),
+    });
+  }, 60000);
 
   const handleError = (message: string) => {
     toast.error(message);
@@ -37,34 +47,31 @@ function App() {
         <Toaster position="top-right" />
         <Layout>
           <Routes>
-            <Route 
-              path="/" 
+            <Route
+              path="/"
               element={
-                <ExploreView 
-                  onError={handleError}
-                  userContext={userContext}
-                />
-              } 
+                <ExploreView onError={handleError} userContext={userContext} />
+              }
             />
-            <Route 
-              path="/playground" 
+            <Route
+              path="/playground"
               element={
-                <PlaygroundView 
+                <PlaygroundView
                   onError={handleError}
                   onSuccess={handleSuccess}
                   userContext={userContext}
                 />
-              } 
+              }
             />
-            <Route 
-              path="/test" 
+            <Route
+              path="/test"
               element={
-                <TestView 
+                <TestView
                   onError={handleError}
                   onSuccess={handleSuccess}
                   userContext={userContext}
                 />
-              } 
+              }
             />
           </Routes>
         </Layout>
