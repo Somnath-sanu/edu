@@ -6,7 +6,7 @@ import { SelectLanguage } from "./SelectLanguage";
 
 interface InitialSearchViewProps {
   handleSearch: (query: string) => void;
-  type: "explore" | "playground";
+  type: "explore" | "practice";
 }
 
 export const InitialSearchView: React.FC<InitialSearchViewProps> = ({
