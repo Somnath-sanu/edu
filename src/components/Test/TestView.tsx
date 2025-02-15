@@ -126,13 +126,13 @@ export const TestView: React.FC<TestViewProps> = ({ onError, onSuccess }) => {
   const renderSelectionView = () => (
     <div className="space-y-8 animate-fade-in">
       <div className="card">
-        <h2 className="text-xl font-semibold mb-4">Select Exam Type</h2>
+        <h2 className="text-xl font-semibold mb-4 text-white ">Select Exam Type</h2>
         <div className="grid grid-cols-2 gap-4">
           {["JEE Mains", "NEET"].map((type) => (
             <button
               key={type}
               onClick={() => setExamType(type === "JEE Mains" ? "JEE" : "NEET")}
-              className={`p-4 rounded-lg border-2 transition-colors ${
+              className={`p-4 rounded-lg border-2 transition-colors text-white ${
                 (examType === "JEE" && type === "JEE Mains") ||
                 (examType === "NEET" && type === "NEET")
                   ? "border-primary bg-primary/10"
@@ -146,7 +146,7 @@ export const TestView: React.FC<TestViewProps> = ({ onError, onSuccess }) => {
       </div>
 
       <div className="card">
-        <h2 className="text-xl font-semibold mb-4">Enter Topic</h2>
+        <h2 className="text-xl font-semibold mb-4 text-white">Enter Topic</h2>
         <SearchBar
           placeholder="e.g., Photosynthesis, Newton's Laws, etc."
           onSearch={(newTopic) => {
@@ -383,10 +383,10 @@ export const TestView: React.FC<TestViewProps> = ({ onError, onSuccess }) => {
         <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent mb-4">
           Rank Predictor
         </h1>
-        <p className="text-gray-400 text-lg mb-2">
+        <p className="dark:text-gray-400 text-gray-800 text-lg mb-2">
           Predict your potential rank based on topic performance
         </p>
-        <div className="inline-block px-4 py-2 bg-gray-800/50 rounded-full text-sm text-gray-400 border border-gray-700/50">
+        <div className="inline-block px-4 py-2 bg-gray-800/50 rounded-full text-sm dark:text-gray-400 text-gray-300 border border-gray-700/50">
           Currently supporting JEE Mains & NEET • More exams coming soon ✨
         </div>
       </div>

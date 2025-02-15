@@ -10,7 +10,7 @@ export const Navbar = ({
 
   return (
     <nav className="">
-      <header className="fixed top-0 left-0 right-0 bg-neutral-300 dark:bg-gray-900 text-black dark:text-white backdrop-blur-lg z-40 flex justify-between gap-4 items-center flex-1 px-4 border-b border-gray-800 dark:border-slate-700">
+      <header className="fixed top-0 left-0 right-0 bg-neutral-300 dark:bg-gray-900 text-black dark:text-white backdrop-blur-lg z-40 flex justify-between gap-4 items-center flex-1 px-4  border-gray-800 dark:border-slate-700 shadow">
         <div className="flex justify-center items-center h-14 px-4">
           <a
             href="/"

@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export async function makeRequest(
   systemPrompt: string,
   userPrompt: string,
@@ -23,6 +25,11 @@ export async function makeRequest(
         }),
       }
     );
+
+    if (response.status === 429) {
+      toast.error("Too Many Requests.Please try again after some time");
+      throw new Error("Too Many Requests");
+    }
 
     const data = await response.json();
     return data.content || "";

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import toast from "react-hot-toast";
 import { Question, UserContext, ExploreResponse } from "../types";
 import { formatContent } from "./formatContent";
 import { buildPrompt } from "./prompts/build";
@@ -261,6 +262,11 @@ export class GPTService {
         }
       );
 
+      if (response.status === 429) {
+        toast.error("Too Many Requests.Please try again after some time");
+        throw new Error("Too Many Requests");
+      }
+
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -309,6 +315,11 @@ export class GPTService {
           }
         );
 
+        if (response.status === 429) {
+          toast.error("Too Many Requests.Please try again after some time");
+          throw new Error("Too Many Requests");
+        }
+
         if (!response.ok) {
           throw new Error("Failed to fetch content");
         }
@@ -316,6 +327,7 @@ export class GPTService {
         // const reader = response.body?.getReader();
         // const decoder = new TextDecoder();
         const result = await response.json();
+
         const stream = result.content.candidates[0].content.parts[0].text;
         let mainContent = "";
         let jsonContent = "";
