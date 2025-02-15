@@ -299,7 +299,7 @@ export class GPTService {
 
     while (retryCount < maxRetries) {
       try {
-        console.log(import.meta.env.VITE_API_URL);
+        // console.log(import.meta.env.VITE_API_URL);
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/explore-content`,
           {
