@@ -160,7 +160,7 @@ export class GPTService {
       const aiResponse = await makeRequest(
         systemPrompt,
         `Create 15 ${examType} questions about ${topic} (5 easy, 5 medium, 5 hard)`,
-        3000
+        4000
       );
 
       if (!aiResponse) {
@@ -169,7 +169,12 @@ export class GPTService {
       }
 
       const responseText = aiResponse.candidates[0].content.parts[0].text;
-      const content = responseText.replace(/```json\n|```/g, "");
+      const content = responseText
+        .replace(/```json\n|```/g, "")
+        .replace(/\\n/g, "")
+        .replace(/\\t/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
 
       let parsed;
       try {
@@ -285,7 +290,6 @@ export class GPTService {
     const userLanguage = JSON.parse(
       localStorage.getItem("userLanguage") ?? "english"
     );
-   
 
     while (retryCount < maxRetries) {
       try {
