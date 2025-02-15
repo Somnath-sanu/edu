@@ -236,13 +236,25 @@ export class GPTService {
 
   async exploreQuery(query: string): Promise<string> {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/explore`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ query: buildPrompt(query) }),
+      console.log(import.meta.env.VITE_API_URL);
+      const userLanguage = localStorage.getItem("userLanguage") ?? "english";
+      console.log({
+        userLanguage,
       });
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/explore`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            query: buildPrompt(query),
+            userLanguage,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -270,19 +282,30 @@ export class GPTService {
   ): Promise<void> {
     const maxRetries = 3;
     let retryCount = 0;
+    const userLanguage = JSON.parse(
+      localStorage.getItem("userLanguage") ?? "english"
+    );
+    console.log({
+      userLanguage,
+    });
 
     while (retryCount < maxRetries) {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/explore-content`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            query,
-            age: userContext.age,
-          }),
-        });
+        console.log(import.meta.env.VITE_API_URL);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/explore-content`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              query,
+              age: userContext.age,
+              userLanguage,
+            }),
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch content");

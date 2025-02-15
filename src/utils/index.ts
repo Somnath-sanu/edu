@@ -31,3 +31,15 @@ export const getTopicsTypeColor = (type: string) => {
       return "bg-gray-500/20 text-gray-400 border-gray-500/30 hover:bg-gray-500/30";
   }
 };
+
+export const getColorClasses = (color: string) => {
+  const colorMap = {
+    purple:
+      "dark:bg-purple-500/20 hover:bg-purple-500/30 border-purple-500/30 text-purple-300",
+    blue: "dark:bg-blue-500/20 hover:bg-blue-500/30 border-blue-500/30 text-blue-300",
+    green:
+      "dark:bg-green-500/20 hover:bg-green-500/30 border-green-500/30 text-green-300",
+  };
+
+  return colorMap[color as keyof typeof colorMap];
+};

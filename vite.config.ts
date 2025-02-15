@@ -10,9 +10,11 @@ export default defineConfig({
     open: true,
     proxy: {
       "/api": {
-        target: "https://edu-backend-1-m2ub.onrender.com",
+        target: "http://localhost:5000",
         changeOrigin: true,
       },
     },
   },
 });
+
+//https://edu-backend-1-m2ub.onrender.com

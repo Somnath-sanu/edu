@@ -8,6 +8,9 @@ import { Trophy, Clock, AlertCircle } from "lucide-react";
 import { Question, UserContext } from "../../types";
 import { calculateRank } from "./calculateRank";
 
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { SelectLanguage } from "../shared/SelectLanguage";
+
 interface TestViewProps {
   onError: (message: string) => void;
   onSuccess: (message: string) => void;
@@ -32,6 +35,14 @@ export const TestView: React.FC<TestViewProps> = ({ onError, onSuccess }) => {
   const [testStarted, setTestStarted] = useState(false);
   const [startTime, setStartTime] = useState<number>(0);
   const [timeSpent, setTimeSpent] = useState("00:00");
+
+  const [selectedLanguage, setSelectedLanguage] = useLocalStorage(
+    "userLanguage",
+    "english"
+  );
+  const handleLanguageSelect = (language: string) => {
+    setSelectedLanguage(language);
+  };
 
   // Forward-counting timer
   useEffect(() => {
@@ -146,6 +157,10 @@ export const TestView: React.FC<TestViewProps> = ({ onError, onSuccess }) => {
           initialValue={topic}
         />
       </div>
+      <SelectLanguage
+        selectedLanguage={selectedLanguage}
+        handleLanguageSelect={handleLanguageSelect}
+      />
 
       <button
         onClick={startTest}

@@ -36,9 +36,14 @@ export interface StreamChunk {
   }>;
 }
 
+export interface UserPreferences {
+  language: "english" | "hindi";
+}
+
 export interface ExploreViewProps {
   initialQuery?: string;
   onError: (message: string) => void;
   onRelatedQueryClick?: (query: string) => void;
   userContext: UserContext;
+  userPreferences?: UserPreferences;
 }
