@@ -285,9 +285,7 @@ export class GPTService {
     const userLanguage = JSON.parse(
       localStorage.getItem("userLanguage") ?? "english"
     );
-    console.log({
-      userLanguage,
-    });
+   
 
     while (retryCount < maxRetries) {
       try {

@@ -4,8 +4,10 @@ export async function makeRequest(
   maxTokens: number = 2000
 ) {
   try {
-    console.log(import.meta.env.VITE_API_URL);
-    
+    const userLanguage = JSON.parse(
+      localStorage.getItem("userLanguage") ?? "english"
+    );
+
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/generate`,
       {
@@ -17,7 +19,7 @@ export async function makeRequest(
           systemPrompt,
           userPrompt,
           maxTokens,
-          userLanguage: localStorage.getItem("userLanguage") ?? "english",
+          userLanguage,
         }),
       }
     );
