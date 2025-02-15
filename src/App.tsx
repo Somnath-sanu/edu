@@ -1,16 +1,13 @@
-// src/App.tsx
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Layout/Layout";
 import { ExploreView } from "./components/Explore/ExploreView";
 import { PlaygroundView } from "./components/Playground/PlaygroundView";
-// import { TestView } from './components/Test/TestView';
 import { PreFillForm } from "./components/shared/PreFillForm";
 import { UserContext } from "./types";
 import { Toaster, toast } from "react-hot-toast";
 import { GoogleTagManager } from "./components/shared/GoogleTagManager";
 import { TestView } from "./components/Test/TestView";
-
 
 function App() {
   const [userContext, setUserContext] = useState<UserContext | null>(null);

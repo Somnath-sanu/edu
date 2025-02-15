@@ -1,4 +1,3 @@
-// src/hooks/useApi.ts
 import { useState } from "react";
 import { Question, UserContext } from "../types";
 import { api } from "../services/api";
